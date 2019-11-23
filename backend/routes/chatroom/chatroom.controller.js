@@ -125,7 +125,7 @@ exports.recommend = (req, res) => {
             if(user.interests.length == 0)
             {
                 ChatRoom.find().limit(10).exec((err, chatroom) => {
-                    console.log(chatroom);
+                    res.json(chatroom);
                 })
                     
             }
