@@ -110,10 +110,6 @@ exports.entrance = (req, res)=>{
     chatroom recommendation api
     GET /chatroom/recommend
 */
-/*
-    chatroom recommendation api
-    GET /chatroom/recommend
-*/
 exports.recommend = (req, res) => {
     var userEmail = req.decoded.email;
 
@@ -124,7 +120,7 @@ exports.recommend = (req, res) => {
 
             if(user.interests.length == 0)
             {
-                var random = Math.floor(Math.random() * 9);
+                var random = Math.floor(Math.random() * 100);
                 ChatRoom.find().skip(random).limit(1).exec((err, chatroom) => {
                     res.json(chatroom);
                 })      
