@@ -139,7 +139,8 @@ exports.recommend = (req, res) => {
                 sort('interest.group interest.section').
                 limit(10).
                 exec((err, chatroom)=>{ // TODO : 소분류순으로 먼저 나오게 하기
-                    var a = chatroom[random_num]
+                    var random = Math.floor(Math.random() * chatroom.length);
+                    var a = chatroom[random];
                     res.json(a);
                 })
             }
