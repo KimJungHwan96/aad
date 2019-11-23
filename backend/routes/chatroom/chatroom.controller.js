@@ -110,6 +110,10 @@ exports.entrance = (req, res)=>{
     chatroom recommendation api
     GET /chatroom/recommend
 */
+/*
+    chatroom recommendation api
+    GET /chatroom/recommend
+*/
 exports.recommend = (req, res) => {
     var userEmail = req.decoded.email;
 
@@ -118,7 +122,15 @@ exports.recommend = (req, res) => {
         if(user){
             var random_num = Math.floor(Math.random() * user.interests.length);
 
-            ChatRoom.find().
+            if(user.interests.length == 0)
+            {
+                ChatRoom.find().exec((err, chatroom) => {
+                    console.log(chatroom);
+                })
+                    
+            }
+            else{
+                ChatRoom.find().
                 or([
                     {"interest.section" : {$regex : '.*'+user.interests[random_num].section+'.*'}},
                     {"interest.group" : {$regex : '.*'+user.interests[random_num].group+'.*'}}
@@ -129,9 +141,11 @@ exports.recommend = (req, res) => {
                 exec((err, chatroom)=>{ // TODO : 소분류순으로 먼저 나오게 하기
                     res.json(chatroom);
                 })
+            }
         }
     })
 }
+
 
 /*
     chatroom compare recommend participated room
