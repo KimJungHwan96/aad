@@ -124,10 +124,10 @@ exports.recommend = (req, res) => {
 
             if(user.interests.length == 0)
             {
-                ChatRoom.find().limit(10).exec((err, chatroom) => {
+                var random = Math.floor(Math.random() * 9);
+                ChatRoom.find().skip(random).limit(1).exec((err, chatroom) => {
                     res.json(chatroom);
-                })
-                    
+                })      
             }
             else{
                 ChatRoom.find().
