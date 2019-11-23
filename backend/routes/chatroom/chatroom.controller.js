@@ -137,7 +137,7 @@ exports.recommend = (req, res) => {
                 ]).
                 select('interest name').
                 sort('interest.group interest.section').
-                limit(5).
+                limit(1).
                 exec((err, chatroom)=>{ // TODO : 소분류순으로 먼저 나오게 하기
                     res.json(chatroom);
                 })
